@@ -1,19 +1,28 @@
 <?php 
-namespace VanguardLTE
+namespace VanguardLTE;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Permission extends Model
 {
-    class Permission extends \Illuminate\Database\Eloquent\Model
+    protected $table = 'permissions';
+
+    protected $fillable = [
+        'name', 
+        'display_name', 
+        'description'
+    ];
+
+    protected $casts = ['removable' => 'boolean'];
+
+    public static function boot()
     {
-        protected $table = 'permissions';
-        protected $fillable = [
-            'name', 
-            'display_name', 
-            'description'
-        ];
-        protected $casts = ['removable' => 'boolean'];
-        public static function boot()
-        {
-            parent::boot();
-        }
+        parent::boot();
     }
 
+    // 🔥 Add this method
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'permission_role');
+    }
 }
