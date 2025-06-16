@@ -1,6 +1,3 @@
-<?php
-
-
 Route::namespace('Frontend')->middleware(['siteisclosed'])->group(function () {
 
     Route::get('/', [
@@ -323,7 +320,7 @@ Route::prefix('backend')->group(function () {
 });
 
 Route::prefix('backend')->middleware(['auth'])->group(function () {
-	Route::namespace('Backend')->group(function () {
+    Route::namespace('Backend')->group(function () {
 
 
 	Route::get('logout', [
@@ -1069,6 +1066,9 @@ Route::prefix('backend')->middleware(['auth'])->group(function () {
         'as' => 'backend.activity.clear',
         'uses' => 'ActivityController@clear',
     ]);
+
+	});
+});
 
 	});
 });
